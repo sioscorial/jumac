@@ -23,6 +23,13 @@ class Ui_Ju(object):
     def setupUi(self, Ju):
         if not Ju.objectName():
             Ju.setObjectName(u"Ju")
+
+        # 기존 레이아웃이 있다면 제거
+        old_layout = Ju.layout()
+        if old_layout:
+            QWidget().setLayout(old_layout)
+
+        # 새 레이아웃 설정
         Ju.resize(292, 352)
         self.verticalLayout = QVBoxLayout(Ju)
         self.verticalLayout.setObjectName(u"verticalLayout")

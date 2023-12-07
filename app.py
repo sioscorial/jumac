@@ -2,29 +2,28 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
 from PySide6.QtOpenGLWidgets import QOpenGLWidget
 from PySide6.QtUiTools import QUiLoader
-from ui_code import Ui_Ju
+from macro import Ui_Jumac
 
 class MyWindow(QMainWindow):
     def __init__(self):
         super(MyWindow, self).__init__()
 
-        try:
-            loader = QUiLoader()
-            self.ui = Ui_Ju()
-            self.ui.setupUi(self)
-        except Exception as e:
-            print(f"Error loading UI: {e}")
+        # UI 설정
+        self.ui = Ui_Jumac()
+        self.ui.setupUi(self)
 
-        self.setCentralWidget(self.ui)
-        self.setWindowTitle("My Window")
-        self.setGeometry(100, 100, 400, 200)
+        # 윈도우 설정
+        self.setWindowTitle("JuMac")
+        self.setGeometry(300, 300, 600, 400)
 
-        self.ui.pushButton_4.clicked.connect(self.button4_clicked)
-        self.ui.pushButton_3.clicked.connect(self.button3_clicked)
-        self.ui.pushButton_2.clicked.connect(self.button2_clicked)
-        self.ui.pushButton.clicked.connect(self.button_clicked)
-        self.ui.pushButton_5.clicked.connect(self.button5_clicked)
+        # 버튼 클릭 이벤트 연결
+        self.ui.pushButton.clicked.connect(self.start_recording)  # 버튼 1에 녹화 시작 연결
+        self.ui.pushButton_2.clicked.connect(self.stop_recording)  # 버튼 2에 녹화 종료 연결
+        self.ui.pushButton_3.clicked.connect(self.start_playing)  # 버튼 3에 반복 시작 연결
+        self.ui.pushButton_4.clicked.connect(self.stop_playing)  # 버튼 4에 반복 종료 연결
 
+
+    # 버튼 클릭 이벤트 처리 메서드
     def button4_clicked(self):
         print("버튼 4를 클릭했습니다.")
 
@@ -44,7 +43,7 @@ def main():
     app = QApplication([])
     window = MyWindow()
     window.show()
-    app.exec_()
+    app.exec()  # 'exec_' 대신 'exec' 사용
 
 if __name__ == "__main__":
     main()

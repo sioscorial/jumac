@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Ju</class>
- <widget class="QDialog" name="Ju">
+ <class>Jumac</class>
+ <widget class="QDialog" name="Jumac">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>714</width>
-    <height>512</height>
+    <width>354</width>
+    <height>187</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>150</x>
      <y>10</y>
      <width>93</width>
      <height>28</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>250</x>
      <y>10</y>
      <width>93</width>
      <height>28</height>
@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>10</y>
+     <x>150</x>
+     <y>50</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -55,8 +55,8 @@
   <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>10</y>
+     <x>250</x>
+     <y>50</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -68,8 +68,8 @@
   <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>11</x>
-     <y>11</y>
+     <x>10</x>
+     <y>10</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -79,6 +79,30 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>pushButton</tabstop>
+  <tabstop>pushButton_2</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton_4</tabstop>
+  <tabstop>pushButton_5</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>Jumac</receiver>
+   <slot>open()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>29</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-274</x>
+     <y>74</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
