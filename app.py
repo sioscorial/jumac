@@ -1,49 +1,51 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
-from PySide6.QtOpenGLWidgets import QOpenGLWidget
-from PySide6.QtUiTools import QUiLoader
-from macro import Ui_Jumac
+import sys
+import psutil
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QComboBox, QLabel, QVBoxLayout, QWidget
 
-class MyWindow(QMainWindow):
+class ProcessController(QMainWindow):
     def __init__(self):
-        super(MyWindow, self).__init__()
+        super().__init__()
 
-        # UI 설정
-        self.ui = Ui_Jumac()
-        self.ui.setupUi(self)
+        self.setWindowTitle("Program Controller")
+        self.setGeometry(100, 100, 400, 200)
 
-        # 윈도우 설정
-        self.setWindowTitle("JuMac")
-        self.setGeometry(300, 300, 600, 400)
+        layout = QVBoxLayout()
 
-        # 버튼 클릭 이벤트 연결
-        self.ui.pushButton.clicked.connect(self.start_recording)  # 버튼 1에 녹화 시작 연결
-        self.ui.pushButton_2.clicked.connect(self.stop_recording)  # 버튼 2에 녹화 종료 연결
-        self.ui.pushButton_3.clicked.connect(self.start_playing)  # 버튼 3에 반복 시작 연결
-        self.ui.pushButton_4.clicked.connect(self.stop_playing)  # 버튼 4에 반복 종료 연결
+        self.program_list_label = QLabel("Select a program:")
+        self.program_list = QComboBox()
+        layout.addWidget(self.program_list_label)
+        layout.addWidget(self.program_list)
 
+        self.control_button = QPushButton("Control Selected Program")
+        layout.addWidget(self.control_button)
 
-    # 버튼 클릭 이벤트 처리 메서드
-    def button4_clicked(self):
-        print("버튼 4를 클릭했습니다.")
+        widget = QWidget()
+        widget.setLayout(layout)
+        self.setCentralWidget(widget)
 
-    def button3_clicked(self):
-        print("버튼 3을 클릭했습니다.")
+        self.control_button.clicked.connect(self.control_selected_program)
 
-    def button2_clicked(self):
-        print("버튼 2를 클릭했습니다.")
+        self.populate_program_list()
 
-    def button_clicked(self):
-        print("버튼 1을 클릭했습니다.")
+    def populate_program_list(self):
+        program_set = set()
+        for process in psutil.process_iter(attrs=['name']):
+            program_name = process.info['name']
+            program_set.add(program_name)
 
-    def button5_clicked(self):
-        print("버튼 5를 클릭했습니다.")
+        self.program_list.addItems(sorted(program_set))
+
+    def control_selected_program(self):
+        selected_program = self.program_list.currentText()
+
+        # Add your code to control the selected program here
+        # You can use psutil or other libraries to interact with the program
 
 def main():
-    app = QApplication([])
-    window = MyWindow()
+    app = QApplication(sys.argv)
+    window = ProcessController()
     window.show()
-    app.exec()  # 'exec_' 대신 'exec' 사용
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
     main()

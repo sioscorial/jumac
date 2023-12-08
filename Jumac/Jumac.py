@@ -23,6 +23,8 @@ class MyWindow(QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.start_playing)
         self.ui.pushButton_4.clicked.connect(self.stop_playing)
 
+        self.ui.retranslateUi(self)
+        
         self.log_label = self.ui.log_label
 
         self.recording = False
@@ -98,7 +100,7 @@ def main():
     thread = threading.Thread(target=window.start_monitoring, daemon=True)
     thread.start()
 
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
